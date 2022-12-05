@@ -85,6 +85,17 @@ let api = {
 
         }
     },
+    comment:{
+        get_comment:(params)=>{
+            return ajax.get('http://blogs.xiaxianxian.top/get_comment',{params})
+        },
+        add_comment:params=>{
+            return ajax.post('http://blogs.xiaxianxian.top/add_comment',params)
+        },
+        add_reply:params=>{
+            return ajax.post('http://blogs.xiaxianxian.top/add_reply',params)
+        }
+    },
     it:{
         //站点信息
         station: () =>{
