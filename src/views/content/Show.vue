@@ -16,6 +16,10 @@
       </div>
       <!-- 文档 -->
       <div class="markdown-body" v-html="articalContent"></div>
+      <!-- 评论 -->
+      <div class="comment_box">
+        <CommentVue :art_id_com="active_art_id"/>
+      </div>
     </div>
   </div>
 </template>
@@ -25,11 +29,13 @@ import { marked } from "marked";
 // import hedindex from "../../components/header/Heidex.vue";
 import Navigater from "../../components/header/Navigater.vue";
 import Haderbgk from "../../components/header/Haderbgk.vue";
+import CommentVue from "../../components/comment/Comment.vue";
 export default {
   name: "Show",
   props: {},
   data() {
     return {
+      active_art_id:-1,
       show_item: [],
       headerInfo: [],
       title_info: {},
@@ -39,7 +45,8 @@ export default {
   },
   components: {
     Haderbgk,
-    Navigater
+    Navigater,
+    CommentVue
   },
   mounted() {},
   destroyed(){
@@ -76,8 +83,8 @@ export default {
       } else {
         this.$message.error("获取文章失败了");
       }
-
-      console.log(res);
+      // this.active_art_id = res.data.art_id;
+      console.log('res',res);
     },
     //刷新更新数据
     async get_one_article(id){
@@ -111,6 +118,8 @@ export default {
         if(item.id){
         localStorage.setItem('article_id',item.id);
         this.get_art_id(item.id);
+      this.active_art_id = item.id;
+
         }else{
 
         this.get_one_article(localStorage.getItem('article_id'));
@@ -120,6 +129,8 @@ export default {
       }else{
         console.log('op')
         this.get_one_article(localStorage.getItem('article_id'));
+      this.active_art_id = parseInt(localStorage.getItem('article_id'));
+
       }
 
       // if (this.$route.query.item.id) {
@@ -148,6 +159,13 @@ export default {
 }
 // 文档css e9ecef
 .markdown-body {
+  width: 847px;
   padding: 20px;
+}
+.comment_box{
+  background: #1f1b24;
+  width: 847px;
+  padding-bottom: 50px;
+  // padding-right: 333px;
 }
 </style>
