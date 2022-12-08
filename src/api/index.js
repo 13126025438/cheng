@@ -17,7 +17,9 @@ let api = {
             return ajax.get('http://blogs.xiaxianxian.top/info',{headers})
         },
         //注册
-
+        register:params=>{
+            return ajax.post('http://blogs.xiaxianxian.top/register',params)
+        },
         //获取用户信息http://blogs.xiaxianxian.top/get_user?id=5
         get_user_info:(params)=>{
             return ajax.get('http://blogs.xiaxianxian.top/get_user',{params})
@@ -66,6 +68,10 @@ let api = {
         //用户的文章
         get_particular_art:(params) => {
             return ajax.get('http://blogs.xiaxianxian.top/get_user_art',{params})
+        },
+        //文章阅读数量+1
+        add_art_read_count:(params) => {
+            return ajax.get('http://blogs.xiaxianxian.top/add_art_read_count',{params})
         }
     },
     banner:{
@@ -95,6 +101,26 @@ let api = {
         add_reply:params=>{
             return ajax.post('http://blogs.xiaxianxian.top/add_reply',params)
         }
+    },
+    // 站点统计
+    website:{
+        get_art_amount:(params) => {
+            return ajax.get('http://blogs.xiaxianxian.top/amount_count',{params})
+        },
+        //访问ip记录
+        insert_ip:(params) =>{
+            return ajax.get('http://blogs.xiaxianxian.top/visit_ip',{params})
+        },
+        get_bar:(params) => {
+            return ajax.get('http://blogs.xiaxianxian.top/barCharts',{params})
+        },
+        get_art_log:(params) => {
+            return ajax.get('http://blogs.xiaxianxian.top/art_log',{params})
+        },
+        //折线图
+        get_line_chart:(params) => {
+            return ajax.get('http://blogs.xiaxianxian.top/line_chart',{params})
+        },
     },
     it:{
         //站点信息

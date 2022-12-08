@@ -81,12 +81,17 @@ const routes = [
       {
         path: '/letter',
         name: 'Letter',
-        component: () => import('../views/centers/Letter.vue'),
+        component: () => import('../views/centers/Letter.vue')
       },
       {
         path:'/bannerTime',
         name:'BannerTime',
         component:() =>import('../components/left/BannerTime.vue')
+      },
+      {
+        path:'/blogCount',
+        name:'BlogCount',
+        component:() =>import('../views/centers/BlogCount.vue')
       }
     ]
   }

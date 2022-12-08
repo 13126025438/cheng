@@ -19,10 +19,15 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button class="submit-btn" type="primary" @click="submitForm('ruleForm')"
+            <el-button
+              class="submit-btn"
+              type="primary"
+              @click="submitForm('ruleForm')"
               >登录</el-button
             >
-            <el-button class="submit-btn" @click="resetForm('ruleForm')">重置</el-button>
+            <el-button class="submit-btn" @click="resetForm('ruleForm')"
+              >重置</el-button
+            >
           </el-form-item>
         </el-form>
 
@@ -43,10 +48,15 @@
           </el-form-item>
 
           <el-form-item>
-            <el-button class="submit-btn" type="primary" @click="submitReg('register')"
+            <el-button
+              class="submit-btn"
+              type="primary"
+              @click="submitReg('register')"
               >注册</el-button
             >
-            <el-button class="submit-btn" @click="resetReg('register')">重置</el-button>
+            <el-button class="submit-btn" @click="resetReg('register')"
+              >重置</el-button
+            >
           </el-form-item>
         </el-form>
       </div>
@@ -69,7 +79,7 @@
 </template>
 <script>
 // import '../../unjs/login'
-import { mapMutations } from 'vuex';
+import { mapMutations } from "vuex";
 export default {
   data() {
     return {
@@ -89,7 +99,12 @@ export default {
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" },
+          {
+            min: 6,
+            max: 16,
+            message: "长度在 6 到 16 个字符",
+            trigger: "blur",
+          },
         ],
       },
       rules: {
@@ -99,14 +114,19 @@ export default {
         ],
         password: [
           { required: true, message: "请输入密码", trigger: "blur" },
-          { min: 6, max: 16, message: "长度在 6 到 16 个字符", trigger: "blur" },
+          {
+            min: 6,
+            max: 16,
+            message: "长度在 6 到 16 个字符",
+            trigger: "blur",
+          },
         ],
       },
     };
   },
   mounted() {},
   methods: {
-    ...mapMutations('user',['login_set_info']),
+    ...mapMutations("user", ["login_set_info"]),
     tab() {
       this.isLoRe = !this.isLoRe;
       // console.log(this.isLoRe)
@@ -114,19 +134,22 @@ export default {
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-         console.log(this.ruleForm);
-         let {username,password} = this.ruleForm;
+          console.log(this.ruleForm);
+          let { username, password } = this.ruleForm;
 
-         this.$api.user.login({
-            username,password
-         }).then(res =>{
-            console.log(res.data.data)
-            localStorage.setItem('user',JSON.stringify(res.data.data));
-            this.login_set_info(res.data.data);
-            this.$router.push('/')
-         })
+          this.$api.user
+            .login({
+              username,
+              password,
+            })
+            .then((res) => {
+              console.log(res.data.data);
+              localStorage.setItem("user", JSON.stringify(res.data.data));
+              this.login_set_info(res.data.data);
+              this.$router.push("/");
+              this.$message.success('登录成功');
 
-
+            });
         } else {
           console.log("error submit!!");
           return false;
@@ -139,7 +162,24 @@ export default {
     submitReg(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
+          let { username, password } = this.register;
+
+          this.$api.user
+            .register({
+              username,
+              password,
+            })
+            .then((res) => {
+              console.log('reg',res.data.data);
+              if(res.data.code === 10004){
+               return this.$message.error(res.data.msg);
+              }
+              // localStorage.setItem("user", JSON.stringify(res.data.data));
+              // this.login_set_info(res.data.data);
+              // this.$router.push("/");
+              this.$message.success('注册成功,快去登录吧！');
+              this.register = {}
+            });
         } else {
           console.log("error submit!!");
           return false;
@@ -210,8 +250,8 @@ export default {
   z-index: 4;
 }
 .form-title {
-    display: block;
-    margin-left: 80px;
+  display: block;
+  margin-left: 80px;
   color: #6266f5;
 }
 .form-warp .sign-up-form {

@@ -3,8 +3,9 @@
     <div class="com_box">
       <!-- 头部 -->
       <div class="com_top">
+       
         <span class="com_title"
-          ><i class="iconfont icon-biaoji"></i>文章评论</span
+          ><i class="iconfont icon-biaoji"></i> {{opop_title}}</span
         >
       </div>
       <!-- 评论展示部 -->
@@ -29,12 +30,17 @@
                 <div class="user_info_top">
                   <div class="user_info">
                     <span>{{ item.comUser.username }}</span>
-                    <span>角色</span>
+                    <!-- <span>角色</span> -->
+                    <div class="role">
+                    <span v-if="item.comUser.user_role == 1" class="station">站长</span>
+                  <span v-if="item.comUser.user_role == 0" class="user_user">用户</span>
+                  <span v-if="(item.comUser.user_role ==2)" class="tourist">游客</span>
+                </div>
                   </div>
                   <div class="user_info_bott bott_farther_width">
                     <div class="time">
                       <!-- <span>6个月前 (05-22)</span> -->
-                      <span>{{ item.create_time }}</span>
+                      <span>{{calculateDiffTime(item.create_time,Math.round(new Date().getTime()/1000).toString(),6)}}</span>
                     </div>
                     <div
                       v-if="!(item.id == isComFar)"
@@ -132,12 +138,16 @@
                     <div class="user_info_top">
                       <div class="user_info">
                         <span>{{ items.user.username }}</span>
-                        <span>角色</span>
+                        <div class="role">
+                    <span v-if="items.user.user_role == 1" class="station">站长</span>
+                  <span v-if="items.user.user_role == 0" class="user_user">用户</span>
+                  <span v-if="(items.user.user_role ==2)" class="tourist">游客</span>
+                </div>
                       </div>
                       <div class="user_info_bott bott_child_width">
                         <div class="time">
                           <!-- <span>6个月前 (05-22)</span> -->
-                          <span>{{ items.create_time }}</span>
+                          <span>{{calculateDiffTime(items.create_time,Math.round(new Date().getTime()/1000).toString(),6)}}</span>
                         </div>
                         <div
                           v-if="!(items.id == isCom)"
@@ -279,19 +289,25 @@
   </div>
 </template>
 <script>
+import { calculateDiffTime } from '../../assets/util/timestamp';
 export default {
   props:{
     art_id_com:{
       type:Number,
       defualt:-1
+    },
+    opop_title:{
+      type:String,
+      default:"文章评论"
     }
   },
   data() {
     return {
+      calculateDiffTime:calculateDiffTime,
       isCom: -1, //显示评论
       isComFar: -2,
       isRely: true,
-      moreShow:false,
+      moreShow:true,
       comment: [],
       far_com: {
         user_id: this.$store.state.user.userInfo.user.id,
@@ -383,7 +399,7 @@ export default {
         return this.$message.error(res.msg);
       }
       this.comment = res.data;
-      // console.log("com", res);
+      console.log("com", res);
     },
     /**
      *
@@ -425,7 +441,7 @@ export default {
 #comment {
   padding: 20px;
   background: #1f1b24;
-  border: 1px solid #909090;
+  border-bottom: 1px solid #909090;
 
   color: #ffffffcc;
   .com_box {
@@ -471,6 +487,26 @@ export default {
               display: flex;
               font-size: 14px;
               font-weight: 200;
+              .role{
+              color: whitesmoke;
+              font-size: 12px;
+              
+              .station{
+                background: #0d6efd;
+                padding: 1px 6px;
+                border-radius: 12px;
+              }
+              .user_user{
+                background: #555666;
+                padding: 1px 6px;
+                border-radius: 12px;
+              }
+              .tourist{
+                background: #67af34;
+                padding: 3px 6px;
+                border-radius: 12px;
+              }
+            }
               span {
                 margin-right: 15px;
               }

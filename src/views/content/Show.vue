@@ -18,7 +18,7 @@
       <div class="markdown-body" v-html="articalContent"></div>
       <!-- 评论 -->
       <div class="comment_box">
-        <CommentVue :art_id_com="active_art_id"/>
+        <CommentVue  :art_id_com="active_art_id"/>
       </div>
     </div>
   </div>
@@ -55,6 +55,7 @@ export default {
   },
   created() {
     this.getShowInfo(this.$route.query.item);
+
     // this.$http.get("http://blogs.xiaxianxian.top/toplic/20221121/f7310f5fdc019884b7b88da7d4d8a3ae.md").then(res => {
     //     const htmlMD = marked(res.data);
     //      console.log(res)
@@ -67,6 +68,7 @@ export default {
     //   console.log(res)
 
     // },
+ 
     async get_art_id(id) {
       const { data: res } = await this.$api.article.get_art_content({
         art_id: id,
