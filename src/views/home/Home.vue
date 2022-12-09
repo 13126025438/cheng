@@ -24,10 +24,20 @@ export default {
         centeritem,
         HaderbgkVue
     },
+    created(){
+        // this.insert_ip();
+    },
     mounted(){
       this.auth();
     },
     methods:{
+         /**
+     * 站点记录 ip
+     */
+    async insert_ip() {
+      const { data: res } = await this.$api.website.insert_ip();
+   
+    },
         auth(){
            const token = localStorage.getItem('token');
     

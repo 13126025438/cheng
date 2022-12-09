@@ -202,8 +202,19 @@ export default {
           nav_name: "文章总计",
           nav_icon: "icon-wenjian",
           nav_icon_show: "",
-          path: "",
-          query: {},
+          path: "/blogCount",
+          query: {
+            title_icon: "icon-wenjian",
+            title_name: "文章总计",
+            un_icon: "icon-jimu",
+            pre_text: [
+              {
+                pre_icon: "icon-dayinjiB",
+                span: "本站数据统计  文章/评论/···",
+                detail: "",
+              },
+            ],
+          },
         },
         {
           id: 5,

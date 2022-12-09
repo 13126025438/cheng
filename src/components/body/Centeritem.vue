@@ -64,36 +64,40 @@
               <div class="article_add" @click="get_login()">登录/切换</div>
             </div>
             <!-- 站点日志 -->
-            <div
+            <div class="">
+              <StationVue/>
+            </div>
+            <!-- <div
               class="use_http"
-              v-for="(item, index) in website_log"
-              :key="index"
             >
               <span class="sp_title">站点日志</span>
               <ul class="http_date">
                 <li>
-                  <i></i><span>用户总数： {{ item.user_count }} 位</span>
+                  <i></i><span>用户总数： {{ website_log.user_count }} 位</span>
                 </li>
                 <li>
-                  <i></i><span>置顶文章： {{ item.top_article }} 篇</span>
+                  <i></i><span>置顶文章： {{ website_log.top_article }} 篇</span>
                 </li>
                 <li>
-                  <i></i><span>标签总数： {{ item.banner_count }} 条</span>
+                  <i></i><span>标签总数： {{ website_log.banner_count }} 条</span>
                 </li>
                 <li>
-                  <i></i><span>文章总数： {{ item.article_count }} 篇 </span>
+                  <i></i><span>文章总数： {{ website_log.article_count }} 篇 </span>
                 </li>
                 <li>
-                  <i></i><span>微语总数： {{ item.banner_count }} 条 </span>
+                  <i></i><span>评论总数： {{ website_log.comment_count }} 条 </span>
                 </li>
                 <li>
-                  <i></i><span>运行天数： {{ calculateDiffTime(item.operation,Math.round(new Date().getTime()/1000).toString(),4) }} </span>
+                  <i></i><span>微语总数： {{ website_log.banner_count }} 条 </span>
                 </li>
                 <li>
-                  <i></i><span>最近更新： {{ item.create_time }} </span>
+                  <i></i><span>运行天数： {{ calculateDiffTime(website_log.operation,Math.round(new Date().getTime()/1000).toString(),4) }} </span>
+                </li>
+                <li>
+                  <i></i><span>最近更新： {{ website_log.create_time }} </span>
                 </li>
               </ul>
-            </div>
+            </div> -->
             <!-- 最新微语 -->
             <div class="banner_box">
               <Banner :attr="false" :class_str="'随机微语'" :loadingBanner="loadingBanner"></Banner>
@@ -131,6 +135,7 @@ import swipers from "./Swipers.vue";
 import Banner from "../side/Banner.vue";
 import PageCutVue from "../pagination/PageCut.vue";
 import ArticleList from "./ArticleList.vue";
+import StationVue from "../right/Station.vue";
 import {mapMutations,mapState} from 'vuex'
 import {calculateDiffTime} from '../../assets/util/timestamp'
 export default {
@@ -169,7 +174,7 @@ export default {
         },
       ],
       //站点日志
-      website_log: [],
+      // website_log: [],
       random_article:[],
       //文章数据类型
       article: [],
@@ -185,12 +190,13 @@ export default {
     swipers,
     PageCutVue,
     ArticleList,
-    Banner
+    Banner,
+    StationVue
   },
   created(){
   
     this.rand_article()
-    this.get_station();
+    // this.get_station();
     this.get_user_info();
     this.get_banner();
     this.get_article(1);

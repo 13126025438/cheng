@@ -84,21 +84,21 @@ export default {
   .content {
     color: #ffffffcc;
     // background: #1f1b24;
-    border: 1px solid red;
+    // border: 1px solid red;
     padding: 10px;
     .left {
       width: 827px;
     //   height: 300px;
     background: #1f1b24;
 
-      border: 1px solid red;
+      // border: 1px solid red;
       margin-right: 10px;
     }
     .right {
       padding: 0px 10px;
       flex: 1;
     //   height: 300px;
-      border: 1px solid red;
+      // border: 1px solid red;
     }
   }
 }
