@@ -56,7 +56,7 @@ import { MarkdownPro } from 'vue-meditor'
         <el-upload
           class="upload-demo"
           ref="upload"
-          action="http://blogs.xiaxianxian.top/ups-image"
+          action="http://blogs.serve.xiaxianxian.top/ups-image"
           name="image"
           :on-success="up_ok"
           :on-preview="handlePreview"
@@ -100,7 +100,7 @@ import { MarkdownPro } from 'vue-meditor'
 
         <el-upload
           class="upload-demo"
-          action="http://blogs.xiaxianxian.top/ups-file"
+          action="http://blogs.serve.xiaxianxian.top/ups-file"
           multiple
           name="file"
           :limit="1"
@@ -242,20 +242,24 @@ export default {
           label: "值得一看",
         },
         {
-          value: "选项2",
-          label: "双皮奶",
+          value: "每日一练",
+          label: "每日一练",
         },
         {
-          value: "选项3",
-          label: "蚵仔煎",
+          value: "实用干货",
+          label: "实用干货",
         },
         {
-          value: "选项4",
-          label: "龙须面",
+          value: "闲言碎语",
+          label: "闲言碎语",
         },
         {
-          value: "选项5",
-          label: "北京烤鸭",
+          value: "ThinkPHP6",
+          label: "ThinkPHP6",
+        },
+        {
+          value: "每天/技巧",
+          label: "每天/技巧",
         },
       ],
       //icon
@@ -339,7 +343,7 @@ export default {
           label: "皇冠",
         },
       ],
-      article_icon: "icon-biaoqing",
+      article_icon: "icon-yuan_huangguan",
       cities4: [
         {
           article_class_icon: "icon-redu",
@@ -511,7 +515,7 @@ export default {
         .catch();
     },
     async oky() {
-      const res = this.$axios.post("http://blogs.xiaxianxian.top/article_add", {
+      const res = this.$axios.post("http://blogs.serve.xiaxianxian.top/article_add", {
         arr: this.arrp,
       });
       console.log(res);
@@ -544,6 +548,10 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+// /deep/ .v-note-op{
+//   position: relative;
+//   color: red;
+// }
 #meditor {
   height: 1000px;
   background-color: #f5f6f7;
@@ -555,7 +563,8 @@ export default {
   //内容区
   .content {
     min-height: 600px;
-    border: red solid 1px;
+    border: 1px solid #909090;
+
     background: #fff;
     margin-top: 30px;
     width: 55%;

@@ -18,7 +18,7 @@
                 <div class="role">
                   <span v-if="users.user_role == 1" class="station">站长</span>
                   <span v-if="users.user_role == 0" class="user_user">用户</span>
-                  <span v-if="!users.user_role" class="tourist">游客</span>
+                  <span v-if="(users.user_role ==2)" class="tourist">游客</span>
                 </div>
                 <span class="ma_yaer">练气期 {{calculateDiffTime(users.create_time,Math.round(new Date().getTime()/1000).toString(),5)}}</span>
               </div>
@@ -89,7 +89,7 @@
 <script>
 import ArticleList from "../../components/body/ArticleList.vue";
 import Navigater from "../../components/header/Navigater.vue";
-import { mapState } from "vuex";
+import { mapState,mapMutations } from "vuex";
 import {calculateDiffTime} from '../../assets/util/timestamp'
 import Banner from "../../components/side/Banner.vue";
 export default {
@@ -102,7 +102,7 @@ export default {
       if_ban:true,
       users:
       {
-          id: 0,
+          id: 2,
           username: "游客",
           user_img: "https://thirdwx.qlogo.cn/mmopen/vi_32/sx1tQVMkMLuSj5qGP84QBvX4QujfDibRYDqYyhSaAw6jYE3xqWIJBiaMzqybkUPB2oWqOlcenrsok3n4GAT3Ddibw/132",
           user_article: '*',
@@ -132,6 +132,7 @@ export default {
     ...mapState('user',['userInfo']),
   },
   methods: {
+    ...mapMutations('user',['login_out_user']),
     //获取用户banner
     async get_user_banner(id){
       const {data:res} = await this.$api.banner.get_user_banner({
@@ -146,6 +147,8 @@ export default {
     },
     //退出登录
     login_out(){
+      this.login_out_user({});
+      this.$router.push('/')
       // this.$store.state.user.userInfo = {}
       // console.log(this.$store.state.user.userInfo)
     },
@@ -180,7 +183,7 @@ export default {
         return;
       }
       this.users = res.data;
-    // this.ip_sets(res.data.last_ip);
+    this.ip_sets(res.data.last_ip);
 
       console.log('user',this.users)
 

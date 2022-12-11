@@ -7,6 +7,7 @@
       :style="{ backgroundImage: `url(${bkg_img})` }"
       :class="isNvg ? '' : 'bgk_padd'"
     >
+    <div class="header_box">123fsaffffffffffffff</div>
       <div class="header_txt">
         <h2>{{ title_info.title_name }}</h2>
         <p>
@@ -160,7 +161,7 @@ export default {
           id: 5,
           nav_icons: "icon-weixin",
           nav_detail: "微信",
-          nav_img: "../../assets/img/idxImg/addwx.jpg",
+          nav_img: "",
         },
         {
           id: 6,

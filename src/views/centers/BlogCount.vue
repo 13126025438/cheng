@@ -178,6 +178,41 @@ export default {
             },
           },
         ],
+      },
+      category_count_option:{
+        title: {
+          text: "分类统计图",
+          left: "center",
+
+          textStyle: {
+            color: "#FFF",
+            fontSize: 16,
+          },
+        },
+        radar: {
+          center: ["50%", "54%"],
+          // shape: 'circle',
+          indicator: [
+            { name: "ThinkPHP6", max: 1000 },
+            { name: "每天/技巧", max: 1000 },
+            { name: "每日一练", max: 1000 },
+            { name: "值得一看", max: 1000 },
+            { name: "实用干货", max: 1000 },
+            { name: "闲言碎语", max: 1000 },
+          ],
+        },
+        series: [
+          {
+            name: "Budget vs spending",
+            type: "radar",
+            data: [
+              {
+                value: [],
+                name: "Allocated Budget",
+              }
+            ],
+          },
+        ],
       }
     };
   },
@@ -259,46 +294,21 @@ export default {
       let myChart = this.$echarts.init(
         document.getElementById("artCategoryCount")
       );
-      let option = {
-        title: {
-          text: "分类统计图",
-          left: "center",
-
-          textStyle: {
-            color: "#FFF",
-            fontSize: 16,
-          },
-        },
-        radar: {
-          center: ["50%", "54%"],
-          // shape: 'circle',
-          indicator: [
-            { name: "杂七杂八", max: 6500 },
-            { name: "踩坑记录", max: 16000 },
-            { name: "每日一练", max: 30000 },
-            { name: "值得一看", max: 38000 },
-            { name: "实用干货", max: 52000 },
-            { name: "闲言碎语", max: 25000 },
-          ],
-        },
-        series: [
-          {
-            name: "Budget vs spending",
-            type: "radar",
-            data: [
-              {
-                value: [4200, 3000, 20000, 35000, 50000, 18000],
-                name: "Allocated Budget",
-              },
-              {
-                value: [5000, 14000, 28000, 26000, 42000, 21000],
-                name: "Actual Spending",
-              },
-            ],
-          },
-        ],
-      };
+      let option = this.category_count_option;
+      //
+      this.$api.website.get_category_count().then(res =>{
+          console.log('get_category_count',res.data.data);
+          let _cate = res.data.data;
+          let arr_cate = []
+          for (let i in _cate) {
+            arr_cate.push((_cate[i])*100)
+      // console.log('new_ca',_cate[i]); // 获取值
+          }
+          this.category_count_option.series[0].data[0].value = arr_cate;
+          console.log('arr_cate',arr_cate);
       myChart.setOption(option);
+
+      })
     },
   },
 };

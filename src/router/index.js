@@ -1,7 +1,9 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/home/Home.vue'
+import NProgress from 'nprogress'
 
+import 'nprogress/nprogress.css'
 Vue.use(VueRouter)
 
 const routes = [
@@ -92,15 +94,30 @@ const routes = [
         path:'/blogCount',
         name:'BlogCount',
         component:() =>import('../views/centers/BlogCount.vue')
+      },
+      {
+        path:'/articleList',
+        name:'ArticleList',
+        component:() =>import('../components/body/ArticleList.vue')
       }
     ]
   }
 ]
+
+
+
 
 const router = new VueRouter({
   // mode: 'history',
   base: process.env.BASE_URL,
   routes
 })
-
+router.beforeEach((to, from, next) => {
+  NProgress.start();
+  next();
+});
+//路由跳转结束
+router.afterEach(() => {
+  NProgress.done()
+})
 export default router

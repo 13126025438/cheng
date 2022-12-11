@@ -553,7 +553,7 @@ export default {
   height: auto;
 }
 .hidden_more{
-  max-height: 230px;
+  min-height: 230px;
 
 }
 .comment_quote {

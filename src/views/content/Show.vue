@@ -56,7 +56,7 @@ export default {
   created() {
     this.getShowInfo(this.$route.query.item);
 
-    // this.$http.get("http://blogs.xiaxianxian.top/toplic/20221121/f7310f5fdc019884b7b88da7d4d8a3ae.md").then(res => {
+    // this.$http.get("http://blogs.serve.xiaxianxian.top/toplic/20221121/f7310f5fdc019884b7b88da7d4d8a3ae.md").then(res => {
     //     const htmlMD = marked(res.data);
     //      console.log(res)
     //     this.articalContent = htmlMD;

@@ -2,7 +2,10 @@
     <div id="home">
         <!-- index top -->
        <NavigaterVue></NavigaterVue>
+       <div class="wid">
         <HaderbgkVue></HaderbgkVue>
+
+       </div>
         <!-- centeritem -->
         <centeritem></centeritem>
     </div>
