@@ -1,42 +1,37 @@
 <template>
   <div id="stations">
     <!-- 站点日志 -->
-    <div class="use_http" v-for="(item, index) in website_log" :key="index">
-      <span class="sp_title">站点日志</span>
-      <ul class="http_date">
-        <li>
-          <i></i><span>用户总数： {{ item.user_count }} 位</span>
-        </li>
-        <li>
-          <i></i><span>置顶文章： {{ item.top_article }} 篇</span>
-        </li>
-        <li>
-          <i></i><span>标签总数： {{ item.banner_count }} 条</span>
-        </li>
-        <li>
-          <i></i><span>文章总数： {{ item.article_count }} 篇 </span>
-        </li>
-        <li>
-          <i></i><span>微语总数： {{ item.banner_count }} 条 </span>
-        </li>
-        <li>
-          <i></i
-          ><span
-            >运行天数：
-            {{
-              calculateDiffTime(
-                item.operation,
-                Math.round(new Date().getTime() / 1000).toString(),
-                4
-              )
-            }}
-          </span>
-        </li>
-        <li>
-          <i></i><span>最近更新： {{ item.create_time }} </span>
-        </li>
-      </ul>
-    </div>
+    <div
+              class="use_http"
+            >
+              <span class="sp_title">站点日志</span>
+              <ul class="http_date">
+                <li>
+                  <i></i><span>用户总数： {{ website_log.user_count }} 位</span>
+                </li>
+                <li>
+                  <i></i><span>置顶文章： {{ website_log.top_article }} 篇</span>
+                </li>
+                <li>
+                  <i></i><span>标签总数： {{ website_log.banner_count }} 条</span>
+                </li>
+                <li>
+                  <i></i><span>文章总数： {{ website_log.article_count }} 篇 </span>
+                </li>
+                <li>
+                  <i></i><span>评论总数： {{ website_log.comment_count }} 条 </span>
+                </li>
+                <li>
+                  <i></i><span>微语总数： {{ website_log.banner_count }} 条 </span>
+                </li>
+                <li>
+                  <i></i><span>运行天数： {{ calculateDiffTime(website_log.operation,Math.round(new Date().getTime()/1000).toString(),4) }} </span>
+                </li>
+                <li>
+                  <i></i><span>最近更新： {{ website_log.create_time }} </span>
+                </li>
+              </ul>
+            </div>
   </div>
 </template>
 <script>

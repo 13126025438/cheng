@@ -26,7 +26,7 @@
               <div class="info_top_right">
                 <span
                   ><i class="iconfont" :class="item.article_read_icon"></i>
-                  {{ item.article_count }} 阅读</span
+                  {{ item.read_count }} 阅读</span
                 >
                 <span
                   ><i class="iconfont" :class="item.article_class_icon"></i
@@ -84,7 +84,7 @@
               <div class="info_top_right">
                 <span
                   ><i class="iconfont" :class="item.article_read_icon"></i>
-                  {{ item.article_count }} 阅读</span
+                  {{ item.read_count }} 阅读</span
                 >
                 <span
                   ><i class="iconfont" :class="item.article_class_icon"></i
@@ -254,6 +254,15 @@ export default {
     },
     //跳转getShow展示页面
     getShow(item) {
+
+    
+       this.$api.article.add_art_read_count({
+        art_id:item.id
+      }).then(res=>{
+        console.log('readcount',res)
+      });
+    
+
       this.$router.push({ path: "/show", query: { item } });
     },
   },

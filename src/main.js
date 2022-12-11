@@ -17,6 +17,16 @@ import javascript from 'highlight.js/lib/languages/javascript'
 
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+
+import NProgress from 'nprogress'
+
+import 'nprogress/nprogress.css'
+
+
+//echarts
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts;
+
 // use
 Vue.use(mavonEditor)
 Vue.use(api)

@@ -1,12 +1,14 @@
 <template>
     <div id="hedindex">
       <!-- header 头部背景大部分 -->
+
       <header
         class="header_box"
         data-ll-status="loaded"
         :style="{ backgroundImage: `url(${bkg_img})` }"
         :class="isNvg ? '' : 'bgk_padd'"
       >
+
         <div class="header_txt">
 
           <div class="header_title">
@@ -85,6 +87,8 @@
   };
   </script>
   <style lang="less" scoped>
+  #hedindex{
+  }
   .bgk_padd {
     padding: 60px 0px;
   }
@@ -98,8 +102,8 @@
     background-size: cover;
     text-align: center;
     color: whitesmoke;
-  
-    /* border: 1px solid red; */
+    // border: 1px solid red;
+    /* */
   }
 
   .col {

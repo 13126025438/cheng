@@ -18,7 +18,7 @@
           </router-link>
 
           <ul class="nav_leve2">
-            <li v-for="(items, i) in item.nav_child" :key="i">
+            <li v-for="(items, i) in item.nav_child" :key="i" @click="get_cate_item(items)">
               <span style="color: #000000e6">{{ items.nav_child_name }}</span>
               <!-- :class="isColor ? bind_color : '' "<span><router-link :to="items.nav_child_herf">{{ items.nav_child_name }}</router-link></span> -->
               <i class="iconfont" :class="items.nav_child_icon"></i>
@@ -104,7 +104,7 @@ export default {
           id: 5,
           nav_icons: "icon-weixin",
           nav_detail: "微信",
-          nav_img: "../../assets/img/idxImg/addwx.jpg",
+          nav_img: "",
         },
         {
           id: 6,
@@ -142,7 +142,7 @@ export default {
               id: 3,
               nav_leve: 2,
               father_leve_id: 1,
-              nav_child_name: "实战记录",
+              nav_child_name: "每日一练",
               nav_child_icon: "icon-quantou",
             },
           ],
@@ -159,14 +159,14 @@ export default {
               id: 4,
               nav_leve: 2,
               father_leve_id: 2,
-              nav_child_name: "报错记录",
+              nav_child_name: "闲言碎语",
               nav_child_icon: "icon-yuan_tianqi",
             },
             {
               id: 5,
               nav_leve: 2,
               father_leve_id: 2,
-              nav_child_name: "一些js功能",
+              nav_child_name: "ThinkPHP6",
               nav_child_icon: "icon-yuan_shuji",
             },
             {
@@ -202,8 +202,19 @@ export default {
           nav_name: "文章总计",
           nav_icon: "icon-wenjian",
           nav_icon_show: "",
-          path: "",
-          query: {},
+          path: "/blogCount",
+          query: {
+            title_icon: "icon-wenjian",
+            title_name: "文章总计",
+            un_icon: "icon-jimu",
+            pre_text: [
+              {
+                pre_icon: "icon-dayinjiB",
+                span: "本站数据统计  文章/评论/···",
+                detail: "",
+              },
+            ],
+          },
         },
         {
           id: 5,
@@ -262,6 +273,24 @@ export default {
       "set_isShowSwiper",
     ]),
     ...mapMutations('page_info',['mut_title_info']),
+    //分类-二级导航
+    get_cate_item(item){
+      console.log('get_cate_item', item.nav_child_name);
+      const category = item.nav_child_name;
+      this.$api.article.get_cate_art({
+        category
+      }).then(res=>{
+        if(res.data.code === 10004){
+          return this.$message.warning(res.data.msg);
+        }
+        this.search_reault = res.data.data;
+        this.set_article(res.data.data);
+        this.set_isShowSwiper(false);
+        this.$router.push("/");
+        
+        console.log('category',res.data);
+      });
+    },
     //搜索触发事件
     // 搜索
     async open3() {
@@ -294,12 +323,6 @@ export default {
       if (item.nav_name == "其它链接") {
         window.open("http://czc.xiaxianxian.top:8086/");
       }
-      // else if (item.nav_name == "微言微语") {
-      //   this.$router.push({
-      //     path: "/banner",
-      //     query: {},
-      //   });
-      // }
     },
     // toggle_search
     fnShowSearch() {

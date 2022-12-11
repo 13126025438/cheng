@@ -4,7 +4,7 @@ module.exports = {
     devServer: {
         proxy: {
             '/api': {
-                target: 'http://blogs.xiaxianxian.top',  // 后台接口域名
+                target: 'http://blogs.serve.xiaxianxian.top',  // 后台接口域名
                 changeOrigin: true,  //是否跨域
                 pathRewrite:{
                     '^/api': '/'

@@ -1,5 +1,5 @@
 <template>
-  <div class="home">
+  <div id="movon">
     <mavon-editor
       :codeStyle="codeStyle"
       :toolbars="toolbars"
@@ -63,7 +63,7 @@ export default {
           value: {
             docxTitle: undefined,
             docxBrief: undefined,
-            docxContent: `请输入文章正文`,
+            docxContent: `内容多的话，使用右上角的全屏编辑吧! "[F10]"`,
             categoryId: undefined,
             // docxTime: new Date().format("yyyy/MM/dd hh:mm:ss"),
           },
@@ -128,6 +128,7 @@ export default {
 };
 </script>
   <style lang="less" scoped>
+  
 .hljs {
   border-radius: 4px !important;
 }

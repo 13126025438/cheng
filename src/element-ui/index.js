@@ -20,9 +20,11 @@ import {
   TabPane,
   Loading,
   Timeline,
-  TimelineItem
+  TimelineItem,
+  Divider
 } from 'element-ui';
 
+Vue.use(Divider)
 Vue.use(Timeline)
 Vue.use(TimelineItem)
 Vue.use(Tabs)
